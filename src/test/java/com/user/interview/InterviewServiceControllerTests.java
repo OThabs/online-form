@@ -11,7 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class InterviewServiceControllerTests {
     private InterviewServiceController classUnderTest = new InterviewServiceController();
 
-
     @Test
     void testThatValidUserReturnsSuccess() {
         User user = new User();
@@ -19,7 +18,7 @@ class InterviewServiceControllerTests {
         user.setIdNumber("1234567891234");
         user.setId("1234567891234");
         assertThat(classUnderTest.createPerson(user)).isNotNull();
-        assertThat(classUnderTest.createPerson(user)).isEqualTo(new ResponseEntity<>(HttpStatus.CREATED));
+        assertThat(classUnderTest.createPerson(user)).isEqualTo(new ResponseEntity<>(user,HttpStatus.CREATED));
     }
 
     @Test

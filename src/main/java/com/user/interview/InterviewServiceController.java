@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
+@CrossOrigin(origins = "*")
 @RestController
 public class InterviewServiceController {
 
@@ -17,6 +17,7 @@ public class InterviewServiceController {
         user.setId("1");
         personMap.put(user.getId(), user);
     }
+
     @RequestMapping(value = "/persons", method = RequestMethod.POST)
     public ResponseEntity<Object> createPerson(@RequestBody User user) {
         if(!isValid(user)) {
@@ -25,7 +26,7 @@ public class InterviewServiceController {
             return new ResponseEntity<>("Invalid ID number", HttpStatus.BAD_REQUEST);
         }
         personMap.put(user.getId(), user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/persons/{id}", method = RequestMethod.PUT)
